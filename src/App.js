@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Link, Route, Switch } from 'react-router-dom';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+//components
+import JobsList from './components/JobsList';
+import Job from './components/Job.js';
+import JobCreate from './components/JobCreate';
+import JobEdit from './components/JobEdit';
+import JobHome from './components/JobsHome';
+
+const App = () => (
+	<>
+		<header>
+			<Link to='/'>Home</Link>
+			<Link to='/jobs/create'>Create New Job</Link>
+			<Link to='/jobs'>Show All Jobs</Link>
+		</header>
+		<main>
+			<Switch>
+				<Route exact path='/' component={JobHome} />
+				<Route exact path='/jobs/create' component={JobCreate} />
+				<Route exact path='/jobs' component={JobsList} />
+				<Route exact path='/jobs:id' component={Job} />
+				<Route exact path='/:id/edit' component={JobEdit} />
+			</Switch>
+		</main>
+	</>
+);
 
 export default App;
